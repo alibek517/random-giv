@@ -101,7 +101,7 @@ const WinnerCard = ({ onReset }: WinnerCardProps) => {
           >
             <div className="w-full h-full rounded-full overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+                src="/photo_2026-01-19_23-04-40.jpg"
                 alt="Winner avatar"
                 className="w-full h-full object-cover"
               />
@@ -116,14 +116,7 @@ const WinnerCard = ({ onReset }: WinnerCardProps) => {
           transition={{ delay: 0.6 }}
           className="flex items-center justify-center gap-2 mb-4"
         >
-          <span className="text-2xl font-bold">700.sherzod</span>
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.8, type: "spring" }}
-          >
-            <BadgeCheck className="w-6 h-6 text-primary" />
-          </motion.div>
+          <span className="text-2xl font-bold">kom1lboyevv_</span>
         </motion.div>
 
         <motion.p
@@ -143,15 +136,15 @@ const WinnerCard = ({ onReset }: WinnerCardProps) => {
           className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-border"
         >
           <div>
-            <p className="text-xl font-bold gradient-text">1.2K</p>
+            <p className="text-xl font-bold gradient-text">19</p>
             <p className="text-xs text-muted-foreground">posts</p>
           </div>
           <div>
-            <p className="text-xl font-bold gradient-text">45.2K</p>
+            <p className="text-xl font-bold gradient-text">1 706</p>
             <p className="text-xs text-muted-foreground">followers</p>
           </div>
           <div>
-            <p className="text-xl font-bold gradient-text">892</p>
+            <p className="text-xl font-bold gradient-text">840</p>
             <p className="text-xs text-muted-foreground">following</p>
           </div>
         </motion.div>
