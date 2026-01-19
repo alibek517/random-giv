@@ -27,19 +27,19 @@ const UsageLimitWarning = ({ onReset }: UsageLimitWarningProps) => {
         </motion.div>
 
         <h2 className="text-2xl font-bold text-foreground mb-3">
-          Limit tugadi! 🚫
+          Limit Reached! 🚫
         </h2>
         
         <p className="text-muted-foreground mb-2">
-          Siz allaqachon 1 marta foydalangansiz.
+          You have already used your upload.
         </p>
         <p className="text-muted-foreground text-sm mb-6">
-          Har bir foydalanuvchi faqat <span className="text-primary font-semibold">1 marta</span> video yuklashi mumkin.
+          Each user can only upload <span className="text-primary font-semibold">1 video</span>.
         </p>
 
         <div className="p-4 rounded-xl bg-secondary/50 border border-border mb-6">
           <p className="text-sm text-muted-foreground">
-            ⚠️ Bu cheklov adolatli tanlovni ta'minlash uchun qo'yilgan.
+            ⚠️ This limit ensures a fair giveaway.
           </p>
         </div>
 
@@ -51,13 +51,13 @@ const UsageLimitWarning = ({ onReset }: UsageLimitWarningProps) => {
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-secondary hover:bg-secondary/80 text-foreground transition-all"
           >
             <RefreshCw className="w-4 h-4" />
-            Qayta urinish (Demo)
+            Try Again (Demo)
           </motion.button>
         )}
       </div>
 
       <p className="text-center text-muted-foreground text-xs mt-6">
-        Savollar bo'lsa admin bilan bog'laning
+        Contact admin for questions
       </p>
     </motion.div>
   );
