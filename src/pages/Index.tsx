@@ -5,15 +5,22 @@ import VideoPreview from "@/components/VideoPreview";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import MysteryBox from "@/components/MysteryBox";
 import WinnerCard from "@/components/WinnerCard";
+import UsageLimitWarning from "@/components/UsageLimitWarning";
+import { useUsageLimit } from "@/hooks/useUsageLimit";
 
-type AppState = "input" | "preview" | "loading" | "mystery" | "winner";
+type AppState = "input" | "preview" | "loading" | "mystery" | "winner" | "blocked";
 
 const Index = () => {
   const [state, setState] = useState<AppState>("input");
+  const { hasUsed, isLoading, markAsUsed, resetUsage } = useUsageLimit();
 
   const handleUrlSubmit = useCallback(() => {
+    if (hasUsed) {
+      setState("blocked");
+      return;
+    }
     setState("preview");
-  }, []);
+  }, [hasUsed]);
 
   const handleStart = useCallback(() => {
     setState("loading");
@@ -24,12 +31,55 @@ const Index = () => {
   }, []);
 
   const handleBoxOpen = useCallback(() => {
+    // Mark as used when they complete the process
+    markAsUsed();
     setState("winner");
-  }, []);
+  }, [markAsUsed]);
 
   const handleReset = useCallback(() => {
     setState("input");
   }, []);
+
+  const handleDemoReset = useCallback(() => {
+    resetUsage();
+    setState("input");
+  }, [resetUsage]);
+
+  // Show loading while checking usage limit
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full"
+        />
+      </div>
+    );
+  }
+
+  // If user already used and trying to access, show blocked screen
+  if (hasUsed && state === "input") {
+    return (
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        {/* Background gradient effects */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div 
+            className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl"
+            style={{ background: "hsl(330 80% 60%)" }}
+          />
+          <div 
+            className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl"
+            style={{ background: "hsl(280 70% 50%)" }}
+          />
+        </div>
+
+        <main className="relative z-10 container mx-auto px-4 py-12 min-h-screen flex items-center justify-center">
+          <UsageLimitWarning onReset={handleDemoReset} />
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
@@ -118,6 +168,18 @@ const Index = () => {
               transition={{ duration: 0.3 }}
             >
               <WinnerCard onReset={handleReset} />
+            </motion.div>
+          )}
+
+          {state === "blocked" && (
+            <motion.div
+              key="blocked"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <UsageLimitWarning onReset={handleDemoReset} />
             </motion.div>
           )}
         </AnimatePresence>

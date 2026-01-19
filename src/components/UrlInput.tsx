@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, Sparkles } from "lucide-react";
+import UsageLimitNotice from "./UsageLimitNotice";
 
 interface UrlInputProps {
   onSubmit: (url: string) => void;
@@ -70,6 +71,9 @@ const UrlInput = ({ onSubmit }: UrlInputProps) => {
         >
           Upload Video
         </motion.button>
+
+        {/* Usage limit warning notice */}
+        <UsageLimitNotice />
       </div>
 
       <p className="text-center text-muted-foreground text-sm mt-6">
